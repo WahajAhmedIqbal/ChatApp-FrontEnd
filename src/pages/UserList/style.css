@@ -1,0 +1,18 @@
+.userlist-Header {
+        display: flex;
+    justify-content: space-around;
+}
+
+ .item {
+     margin: 0 50px;
+ }
+
+.sub-data {
+    display: flex;
+    justify-content: space-around;
+    margin: 5px 0;
+}
+
+.compo {
+    display: none;
+}

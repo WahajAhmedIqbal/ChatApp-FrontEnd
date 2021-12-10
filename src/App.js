@@ -1,24 +1,36 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import Router from "./routers";
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
+// import io from 'socket.io-client'
+import AppContext from './Context';
+
+
+
+// const socket = io.connect('http://localhost:3001')
 
 function App() {
+  const [userdata, setUserdata] = useState(null)
+  const [selectedUserid, setSelectedUserid] = useState(null)
+  const [selectedUserName, setSelectedUserName] = useState(null)
+
+  const userDetails = {
+    userdata: userdata,
+    selectedUserid: selectedUserid,
+    selectedUserName: selectedUserName,
+    setUserdata,
+    setSelectedUserid,
+    setSelectedUserName,
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider value={userDetails}>
+      <BrowserRouter>
+        <div className="App">
+          <Router />
+        </div>
+      </BrowserRouter>
+    </AppContext.Provider>
   );
 }
 
