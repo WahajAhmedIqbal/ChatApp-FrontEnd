@@ -1,22 +1,22 @@
 import React, { useContext, useState } from 'react'
+import io from 'socket.io-client'
 import { useNavigate } from 'react-router-dom'
 import './style.css'
 
-import io from 'socket.io-client'
 
 import swal from 'sweetalert';
 import instance from '../../Provider/index'
 
 import AppContext from '../../Context';
 
+const socket = new io.connect('http://localhost:3001')
+
 const SignIn = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    // const [UserId, setUserId] = useState()
 
     const context = useContext(AppContext)
 
-    const socket = new io.connect('http://localhost:3001')
 
     let navigate = useNavigate()
 
@@ -31,9 +31,7 @@ const SignIn = () => {
                 .then(function (response) {
 
                     if (response.data.user.status === 'approved') {
-                        // setUserId(response.data.user.id)
                         context.setUserdata(response.data.user)
-                        console.log('context->Sign ', response.data.user.id)
                         socket.emit('login', { userId: response.data.user.id });
                         swal('access granted')
                         navigate('/UserList')

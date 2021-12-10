@@ -17,7 +17,6 @@ const ChatRoom = () => {
 
     const [currentMessage, setCurrentMessage] = useState("")
     const [mesageList, setMesageList] = useState([])
-    const [userName, setUserName] = useState("")
 
     const context = useContext(AppContext)
     const MyId = context.userdata
@@ -40,7 +39,7 @@ const ChatRoom = () => {
         socket.on('receive_message', (data) => {
             setMesageList((list) => [...list, data])
         })
-    }, [socket])
+    }, [])
 
 
     return (
@@ -56,23 +55,23 @@ const ChatRoom = () => {
                 </div>
             </div>
             <div className="chat-body">
-                {
-                    mesageList.map((item) => (
-                        <div className='message' id={item.myId != MyId.id ? 'you' : "other"}>
-                            {console.log(item)}
-                            <div>
-                                <ScrollToBottom className='message-container'>
+                <ScrollToBottom className='message-container'>
+                    {
+                        mesageList?.map((item) => (
+                            <div className='message' id={item.myId !== MyId.id ? 'you' : "other"}>
+                                {console.log(item)}
+                                <div>
                                     <div className='message-content'>
                                         <p>
                                             {item.message}
                                         </p>
                                     </div>
-                                </ScrollToBottom>
+                                </div>
                             </div>
-                        </div>
-                    )
-                    )
-                }
+                        )
+                        )
+                    }
+                </ScrollToBottom>
             </div>
             <div className="chat-footer">
                 <input type='text'

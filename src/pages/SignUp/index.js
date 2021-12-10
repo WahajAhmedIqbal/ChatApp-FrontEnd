@@ -10,8 +10,7 @@ const SignUp = ({ socket }) => {
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
-    const [phoneNumber, setPhoneNumber] = useState("")
-    const [gender, setGender] = useState("")
+
     const [password, setPassword] = useState("")
 
 
